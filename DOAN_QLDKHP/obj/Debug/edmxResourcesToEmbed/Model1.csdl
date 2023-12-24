@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDangKiHPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="QLDangKiHPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbAccounts" EntityType="QLDangKiHPModel.tbAccount" />
+    <EntitySet Name="tbChiTietPDKs" EntityType="QLDangKiHPModel.tbChiTietPDK" />
+    <EntitySet Name="tbDiems" EntityType="QLDangKiHPModel.tbDiem" />
+    <EntitySet Name="tbKhoas" EntityType="QLDangKiHPModel.tbKhoa" />
+    <EntitySet Name="tbMonHocs" EntityType="QLDangKiHPModel.tbMonHoc" />
+    <EntitySet Name="tbPhieuDangKies" EntityType="QLDangKiHPModel.tbPhieuDangKy" />
+    <EntitySet Name="tbSinhViens" EntityType="QLDangKiHPModel.tbSinhVien" />
+    <AssociationSet Name="fk_Account_MSV" Association="QLDangKiHPModel.fk_Account_MSV">
+      <End Role="tbSinhVien" EntitySet="tbSinhViens" />
+      <End Role="tbAccount" EntitySet="tbAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPDK_MaMH" Association="QLDangKiHPModel.FK_CTPDK_MaMH">
+      <End Role="tbMonHoc" EntitySet="tbMonHocs" />
+      <End Role="tbChiTietPDK" EntitySet="tbChiTietPDKs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbChiTietPDK_SoPDK" Association="QLDangKiHPModel.FK_tbChiTietPDK_SoPDK">
+      <End Role="tbPhieuDangKy" EntitySet="tbPhieuDangKies" />
+      <End Role="tbChiTietPDK" EntitySet="tbChiTietPDKs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbDiem__MaMH__5AEE82B9" Association="QLDangKiHPModel.FK__tbDiem__MaMH__5AEE82B9">
+      <End Role="tbMonHoc" EntitySet="tbMonHocs" />
+      <End Role="tbDiem" EntitySet="tbDiems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbDiem__MaSV__59FA5E80" Association="QLDangKiHPModel.FK__tbDiem__MaSV__59FA5E80">
+      <End Role="tbSinhVien" EntitySet="tbSinhViens" />
+      <End Role="tbDiem" EntitySet="tbDiems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbSinhVie__MaKho__4CA06362" Association="QLDangKiHPModel.FK__tbSinhVie__MaKho__4CA06362">
+      <End Role="tbKhoa" EntitySet="tbKhoas" />
+      <End Role="tbSinhVien" EntitySet="tbSinhViens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MH_MaKhoa" Association="QLDangKiHPModel.FK_MH_MaKhoa">
+      <End Role="tbKhoa" EntitySet="tbKhoas" />
+      <End Role="tbMonHoc" EntitySet="tbMonHocs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PDK_MaSV" Association="QLDangKiHPModel.FK_PDK_MaSV">
+      <End Role="tbSinhVien" EntitySet="tbSinhViens" />
+      <End Role="tbPhieuDangKy" EntitySet="tbPhieuDangKies" />
+    </AssociationSet>
+    <AssociationSet Name="tbMonTienQuyet" Association="QLDangKiHPModel.tbMonTienQuyet">
+      <End Role="tbMonHoc" EntitySet="tbMonHocs" />
+      <End Role="tbMonHoc1" EntitySet="tbMonHocs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbAccount">
+    <Key>
+      <PropertyRef Name="TaiKhoan" />
+    </Key>
+    <Property Name="MaSV" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbSinhVien" Relationship="QLDangKiHPModel.fk_Account_MSV" FromRole="tbAccount" ToRole="tbSinhVien" />
+  </EntityType>
+  <EntityType Name="tbChiTietPDK">
+    <Key>
+      <PropertyRef Name="MaDK" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaDK" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TenLHP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoTinChi" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ThongTin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbMonHoc" Relationship="QLDangKiHPModel.FK_CTPDK_MaMH" FromRole="tbChiTietPDK" ToRole="tbMonHoc" />
+    <NavigationProperty Name="tbPhieuDangKy" Relationship="QLDangKiHPModel.FK_tbChiTietPDK_SoPDK" FromRole="tbChiTietPDK" ToRole="tbPhieuDangKy" />
+  </EntityType>
+  <EntityType Name="tbDiem">
+    <Key>
+      <PropertyRef Name="MaSV" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaSV" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="DiemKiemTraTrongLop" Type="Double" />
+    <Property Name="DiemGiuaKy" Type="Double" />
+    <Property Name="DiemCuoiKy" Type="Double" />
+    <NavigationProperty Name="tbMonHoc" Relationship="QLDangKiHPModel.FK__tbDiem__MaMH__5AEE82B9" FromRole="tbDiem" ToRole="tbMonHoc" />
+    <NavigationProperty Name="tbSinhVien" Relationship="QLDangKiHPModel.FK__tbDiem__MaSV__59FA5E80" FromRole="tbDiem" ToRole="tbSinhVien" />
+  </EntityType>
+  <EntityType Name="tbKhoa">
+    <Key>
+      <PropertyRef Name="MaKhoa" />
+    </Key>
+    <Property Name="MaKhoa" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TenKhoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaDiemVanPhong" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoaiLienLac" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbSinhViens" Relationship="QLDangKiHPModel.FK__tbSinhVie__MaKho__4CA06362" FromRole="tbKhoa" ToRole="tbSinhVien" />
+    <NavigationProperty Name="tbMonHocs" Relationship="QLDangKiHPModel.FK_MH_MaKhoa" FromRole="tbKhoa" ToRole="tbMonHoc" />
+  </EntityType>
+  <EntityType Name="tbMonHoc">
+    <Key>
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaMH" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="MaKhoa" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TenMH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoTinChi" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tbChiTietPDKs" Relationship="QLDangKiHPModel.FK_CTPDK_MaMH" FromRole="tbMonHoc" ToRole="tbChiTietPDK" />
+    <NavigationProperty Name="tbDiems" Relationship="QLDangKiHPModel.FK__tbDiem__MaMH__5AEE82B9" FromRole="tbMonHoc" ToRole="tbDiem" />
+    <NavigationProperty Name="tbKhoa" Relationship="QLDangKiHPModel.FK_MH_MaKhoa" FromRole="tbMonHoc" ToRole="tbKhoa" />
+    <NavigationProperty Name="tbMonHoc1" Relationship="QLDangKiHPModel.tbMonTienQuyet" FromRole="tbMonHoc" ToRole="tbMonHoc1" />
+    <NavigationProperty Name="tbMonHocs" Relationship="QLDangKiHPModel.tbMonTienQuyet" FromRole="tbMonHoc1" ToRole="tbMonHoc" />
+  </EntityType>
+  <EntityType Name="tbPhieuDangKy">
+    <Key>
+      <PropertyRef Name="SoPDK" />
+    </Key>
+    <Property Name="SoPDK" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+    <Property Name="MaSV" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TenKhoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HocKi" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="TongSoTC" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDK" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tbChiTietPDKs" Relationship="QLDangKiHPModel.FK_tbChiTietPDK_SoPDK" FromRole="tbPhieuDangKy" ToRole="tbChiTietPDK" />
+    <NavigationProperty Name="tbSinhVien" Relationship="QLDangKiHPModel.FK_PDK_MaSV" FromRole="tbPhieuDangKy" ToRole="tbSinhVien" />
+  </EntityType>
+  <EntityType Name="tbSinhVien">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="MaKhoa" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="HoTen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="GioiTinh" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QueQuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbAccounts" Relationship="QLDangKiHPModel.fk_Account_MSV" FromRole="tbSinhVien" ToRole="tbAccount" />
+    <NavigationProperty Name="tbDiems" Relationship="QLDangKiHPModel.FK__tbDiem__MaSV__59FA5E80" FromRole="tbSinhVien" ToRole="tbDiem" />
+    <NavigationProperty Name="tbKhoa" Relationship="QLDangKiHPModel.FK__tbSinhVie__MaKho__4CA06362" FromRole="tbSinhVien" ToRole="tbKhoa" />
+    <NavigationProperty Name="tbPhieuDangKies" Relationship="QLDangKiHPModel.FK_PDK_MaSV" FromRole="tbSinhVien" ToRole="tbPhieuDangKy" />
+  </EntityType>
+  <Association Name="fk_Account_MSV">
+    <End Type="QLDangKiHPModel.tbSinhVien" Role="tbSinhVien" Multiplicity="0..1" />
+    <End Type="QLDangKiHPModel.tbAccount" Role="tbAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbAccount">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPDK_MaMH">
+    <End Type="QLDangKiHPModel.tbMonHoc" Role="tbMonHoc" Multiplicity="1" />
+    <End Type="QLDangKiHPModel.tbChiTietPDK" Role="tbChiTietPDK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbChiTietPDK">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbChiTietPDK_SoPDK">
+    <End Type="QLDangKiHPModel.tbPhieuDangKy" Role="tbPhieuDangKy" Multiplicity="1" />
+    <End Type="QLDangKiHPModel.tbChiTietPDK" Role="tbChiTietPDK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPhieuDangKy">
+        <PropertyRef Name="SoPDK" />
+      </Principal>
+      <Dependent Role="tbChiTietPDK">
+        <PropertyRef Name="MaDK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbDiem__MaMH__5AEE82B9">
+    <End Type="QLDangKiHPModel.tbMonHoc" Role="tbMonHoc" Multiplicity="1" />
+    <End Type="QLDangKiHPModel.tbDiem" Role="tbDiem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbDiem">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbDiem__MaSV__59FA5E80">
+    <End Type="QLDangKiHPModel.tbSinhVien" Role="tbSinhVien" Multiplicity="1" />
+    <End Type="QLDangKiHPModel.tbDiem" Role="tbDiem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbDiem">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbSinhVie__MaKho__4CA06362">
+    <End Type="QLDangKiHPModel.tbKhoa" Role="tbKhoa" Multiplicity="0..1" />
+    <End Type="QLDangKiHPModel.tbSinhVien" Role="tbSinhVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbKhoa">
+        <PropertyRef Name="MaKhoa" />
+      </Principal>
+      <Dependent Role="tbSinhVien">
+        <PropertyRef Name="MaKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MH_MaKhoa">
+    <End Type="QLDangKiHPModel.tbKhoa" Role="tbKhoa" Multiplicity="0..1" />
+    <End Type="QLDangKiHPModel.tbMonHoc" Role="tbMonHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbKhoa">
+        <PropertyRef Name="MaKhoa" />
+      </Principal>
+      <Dependent Role="tbMonHoc">
+        <PropertyRef Name="MaKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PDK_MaSV">
+    <End Type="QLDangKiHPModel.tbSinhVien" Role="tbSinhVien" Multiplicity="0..1" />
+    <End Type="QLDangKiHPModel.tbPhieuDangKy" Role="tbPhieuDangKy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbPhieuDangKy">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tbMonTienQuyet">
+    <End Type="QLDangKiHPModel.tbMonHoc" Role="tbMonHoc" Multiplicity="*" />
+    <End Type="QLDangKiHPModel.tbMonHoc" Role="tbMonHoc1" Multiplicity="*" />
+  </Association>
+</Schema>

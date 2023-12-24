@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c10b38a20a1c436aa355d01953c08da2" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbAccount" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbChiTietPDK" Width="1.5" PointX="7.5" PointY="7.375" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbDiem" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbKhoa" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbMonHoc" Width="1.5" PointX="3" PointY="8.875" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbPhieuDangKy" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="QLDangKiHPModel.tbSinhVien" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="QLDangKiHPModel.fk_Account_MSV" />
+        <AssociationConnector Association="QLDangKiHPModel.FK_CTPDK_MaMH" />
+        <AssociationConnector Association="QLDangKiHPModel.FK_tbChiTietPDK_SoPDK" />
+        <AssociationConnector Association="QLDangKiHPModel.FK__tbDiem__MaMH__5AEE82B9" />
+        <AssociationConnector Association="QLDangKiHPModel.FK__tbDiem__MaSV__59FA5E80" />
+        <AssociationConnector Association="QLDangKiHPModel.FK__tbSinhVie__MaKho__4CA06362" />
+        <AssociationConnector Association="QLDangKiHPModel.FK_MH_MaKhoa" />
+        <AssociationConnector Association="QLDangKiHPModel.FK_PDK_MaSV" />
+        <AssociationConnector Association="QLDangKiHPModel.tbMonTienQuyet" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

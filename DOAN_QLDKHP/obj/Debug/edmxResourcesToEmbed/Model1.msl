@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLDangKiHPModelStoreContainer" CdmEntityContainer="QLDangKiHPEntities">
+    <EntitySetMapping Name="tbAccounts">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbAccount">
+        <MappingFragment StoreEntitySet="tbAccount">
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+          <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbChiTietPDKs">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbChiTietPDK">
+        <MappingFragment StoreEntitySet="tbChiTietPDK">
+          <ScalarProperty Name="ThongTin" ColumnName="ThongTin" />
+          <ScalarProperty Name="SoTinChi" ColumnName="SoTinChi" />
+          <ScalarProperty Name="TenLHP" ColumnName="TenLHP" />
+          <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+          <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbDiems">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbDiem">
+        <MappingFragment StoreEntitySet="tbDiem">
+          <ScalarProperty Name="DiemCuoiKy" ColumnName="DiemCuoiKy" />
+          <ScalarProperty Name="DiemGiuaKy" ColumnName="DiemGiuaKy" />
+          <ScalarProperty Name="DiemKiemTraTrongLop" ColumnName="DiemKiemTraTrongLop" />
+          <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+          <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbKhoas">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbKhoa">
+        <MappingFragment StoreEntitySet="tbKhoa">
+          <ScalarProperty Name="SoDienThoaiLienLac" ColumnName="SoDienThoaiLienLac" />
+          <ScalarProperty Name="DiaDiemVanPhong" ColumnName="DiaDiemVanPhong" />
+          <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+          <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbMonHocs">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbMonHoc">
+        <MappingFragment StoreEntitySet="tbMonHoc">
+          <ScalarProperty Name="SoTinChi" ColumnName="SoTinChi" />
+          <ScalarProperty Name="TenMH" ColumnName="TenMH" />
+          <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
+          <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPhieuDangKies">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbPhieuDangKy">
+        <MappingFragment StoreEntitySet="tbPhieuDangKy">
+          <ScalarProperty Name="NgayDK" ColumnName="NgayDK" />
+          <ScalarProperty Name="TongSoTC" ColumnName="TongSoTC" />
+          <ScalarProperty Name="HocKi" ColumnName="HocKi" />
+          <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+          <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+          <ScalarProperty Name="SoPDK" ColumnName="SoPDK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbSinhViens">
+      <EntityTypeMapping TypeName="QLDangKiHPModel.tbSinhVien">
+        <MappingFragment StoreEntitySet="tbSinhVien">
+          <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="MaKhoa" ColumnName="MaKhoa" />
+          <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tbMonTienQuyet" TypeName="QLDangKiHPModel.tbMonTienQuyet" StoreEntitySet="tbMonTienQuyet">
+      <EndProperty Name="tbMonHoc1">
+        <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+      </EndProperty>
+      <EndProperty Name="tbMonHoc">
+        <ScalarProperty Name="MaMH" ColumnName="MaMonTienQuyet" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDangKiHPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbAccount">
+    <Key>
+      <PropertyRef Name="TaiKhoan" />
+    </Key>
+    <Property Name="MaSV" Type="nchar" MaxLength="15" />
+    <Property Name="TaiKhoan" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MatKhau" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbChiTietPDK">
+    <Key>
+      <PropertyRef Name="MaDK" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaDK" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="MaMH" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="TenLHP" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoTinChi" Type="nvarchar" MaxLength="5" />
+    <Property Name="ThongTin" Type="ntext" />
+  </EntityType>
+  <EntityType Name="tbDiem">
+    <Key>
+      <PropertyRef Name="MaSV" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaSV" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="MaMH" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="DiemKiemTraTrongLop" Type="float" />
+    <Property Name="DiemGiuaKy" Type="float" />
+    <Property Name="DiemCuoiKy" Type="float" />
+  </EntityType>
+  <EntityType Name="tbKhoa">
+    <Key>
+      <PropertyRef Name="MaKhoa" />
+    </Key>
+    <Property Name="MaKhoa" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="TenKhoa" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaDiemVanPhong" Type="nvarchar" MaxLength="255" />
+    <Property Name="SoDienThoaiLienLac" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbMonHoc">
+    <Key>
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaMH" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="MaKhoa" Type="nchar" MaxLength="15" />
+    <Property Name="TenMH" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoTinChi" Type="nchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="tbMonTienQuyet">
+    <Key>
+      <PropertyRef Name="MaMH" />
+      <PropertyRef Name="MaMonTienQuyet" />
+    </Key>
+    <Property Name="MaMH" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="MaMonTienQuyet" Type="nchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbPhieuDangKy">
+    <Key>
+      <PropertyRef Name="SoPDK" />
+    </Key>
+    <Property Name="SoPDK" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="MaSV" Type="nchar" MaxLength="15" />
+    <Property Name="TenKhoa" Type="nvarchar" MaxLength="50" />
+    <Property Name="HocKi" Type="nvarchar" MaxLength="5" />
+    <Property Name="TongSoTC" Type="nvarchar" MaxLength="5" />
+    <Property Name="NgayDK" Type="date" />
+  </EntityType>
+  <EntityType Name="tbSinhVien">
+    <Key>
+      <PropertyRef Name="MaSV" />
+    </Key>
+    <Property Name="MaSV" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="MaKhoa" Type="nchar" MaxLength="15" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="5" />
+    <Property Name="DiaChi" Type="ntext" />
+    <Property Name="QueQuan" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__tbDiem__MaMH__47DBAE45">
+    <End Role="tbMonHoc" Type="Self.tbMonHoc" Multiplicity="1" />
+    <End Role="tbDiem" Type="Self.tbDiem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbDiem">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbDiem__MaSV__46E78A0C">
+    <End Role="tbSinhVien" Type="Self.tbSinhVien" Multiplicity="1" />
+    <End Role="tbDiem" Type="Self.tbDiem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbDiem">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbMonTien__MaMon__4E88ABD4">
+    <End Role="tbMonHoc" Type="Self.tbMonHoc" Multiplicity="1" />
+    <End Role="tbMonTienQuyet" Type="Self.tbMonTienQuyet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbMonTienQuyet">
+        <PropertyRef Name="MaMonTienQuyet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbMonTienQ__MaMH__4D94879B">
+    <End Role="tbMonHoc" Type="Self.tbMonHoc" Multiplicity="1" />
+    <End Role="tbMonTienQuyet" Type="Self.tbMonTienQuyet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbMonTienQuyet">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbSinhVie__MaKho__398D8EEE">
+    <End Role="tbKhoa" Type="Self.tbKhoa" Multiplicity="0..1" />
+    <End Role="tbSinhVien" Type="Self.tbSinhVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbKhoa">
+        <PropertyRef Name="MaKhoa" />
+      </Principal>
+      <Dependent Role="tbSinhVien">
+        <PropertyRef Name="MaKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Account_MSV">
+    <End Role="tbSinhVien" Type="Self.tbSinhVien" Multiplicity="0..1" />
+    <End Role="tbAccount" Type="Self.tbAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbAccount">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPDK_MaMH">
+    <End Role="tbMonHoc" Type="Self.tbMonHoc" Multiplicity="1" />
+    <End Role="tbChiTietPDK" Type="Self.tbChiTietPDK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="tbChiTietPDK">
+        <PropertyRef Name="MaMH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MH_MaKhoa">
+    <End Role="tbKhoa" Type="Self.tbKhoa" Multiplicity="0..1" />
+    <End Role="tbMonHoc" Type="Self.tbMonHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbKhoa">
+        <PropertyRef Name="MaKhoa" />
+      </Principal>
+      <Dependent Role="tbMonHoc">
+        <PropertyRef Name="MaKhoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PDK_MaSV">
+    <End Role="tbSinhVien" Type="Self.tbSinhVien" Multiplicity="0..1" />
+    <End Role="tbPhieuDangKy" Type="Self.tbPhieuDangKy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbSinhVien">
+        <PropertyRef Name="MaSV" />
+      </Principal>
+      <Dependent Role="tbPhieuDangKy">
+        <PropertyRef Name="MaSV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbChiTietPDK_SoPDK">
+    <End Role="tbPhieuDangKy" Type="Self.tbPhieuDangKy" Multiplicity="1" />
+    <End Role="tbChiTietPDK" Type="Self.tbChiTietPDK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPhieuDangKy">
+        <PropertyRef Name="SoPDK" />
+      </Principal>
+      <Dependent Role="tbChiTietPDK">
+        <PropertyRef Name="MaDK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLDangKiHPModelStoreContainer">
+    <EntitySet Name="tbAccount" EntityType="Self.tbAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbChiTietPDK" EntityType="Self.tbChiTietPDK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbDiem" EntityType="Self.tbDiem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbKhoa" EntityType="Self.tbKhoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbMonHoc" EntityType="Self.tbMonHoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbMonTienQuyet" EntityType="Self.tbMonTienQuyet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbPhieuDangKy" EntityType="Self.tbPhieuDangKy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbSinhVien" EntityType="Self.tbSinhVien" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tbDiem__MaMH__47DBAE45" Association="Self.FK__tbDiem__MaMH__47DBAE45">
+      <End Role="tbMonHoc" EntitySet="tbMonHoc" />
+      <End Role="tbDiem" EntitySet="tbDiem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbDiem__MaSV__46E78A0C" Association="Self.FK__tbDiem__MaSV__46E78A0C">
+      <End Role="tbSinhVien" EntitySet="tbSinhVien" />
+      <End Role="tbDiem" EntitySet="tbDiem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbMonTien__MaMon__4E88ABD4" Association="Self.FK__tbMonTien__MaMon__4E88ABD4">
+      <End Role="tbMonHoc" EntitySet="tbMonHoc" />
+      <End Role="tbMonTienQuyet" EntitySet="tbMonTienQuyet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbMonTienQ__MaMH__4D94879B" Association="Self.FK__tbMonTienQ__MaMH__4D94879B">
+      <End Role="tbMonHoc" EntitySet="tbMonHoc" />
+      <End Role="tbMonTienQuyet" EntitySet="tbMonTienQuyet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbSinhVie__MaKho__398D8EEE" Association="Self.FK__tbSinhVie__MaKho__398D8EEE">
+      <End Role="tbKhoa" EntitySet="tbKhoa" />
+      <End Role="tbSinhVien" EntitySet="tbSinhVien" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Account_MSV" Association="Self.fk_Account_MSV">
+      <End Role="tbSinhVien" EntitySet="tbSinhVien" />
+      <End Role="tbAccount" EntitySet="tbAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPDK_MaMH" Association="Self.FK_CTPDK_MaMH">
+      <End Role="tbMonHoc" EntitySet="tbMonHoc" />
+      <End Role="tbChiTietPDK" EntitySet="tbChiTietPDK" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MH_MaKhoa" Association="Self.FK_MH_MaKhoa">
+      <End Role="tbKhoa" EntitySet="tbKhoa" />
+      <End Role="tbMonHoc" EntitySet="tbMonHoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PDK_MaSV" Association="Self.FK_PDK_MaSV">
+      <End Role="tbSinhVien" EntitySet="tbSinhVien" />
+      <End Role="tbPhieuDangKy" EntitySet="tbPhieuDangKy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbChiTietPDK_SoPDK" Association="Self.FK_tbChiTietPDK_SoPDK">
+      <End Role="tbPhieuDangKy" EntitySet="tbPhieuDangKy" />
+      <End Role="tbChiTietPDK" EntitySet="tbChiTietPDK" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
